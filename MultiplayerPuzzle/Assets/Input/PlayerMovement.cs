@@ -43,6 +43,8 @@ public class PlayerMovement : NetworkBehaviour
             Debug.Log(m_moveDirection);
             transform.position += m_moveDirection;
             //m_rigidbody.AddForce( m_moveForce * Time.fixedDeltaTime * m_moveDirection);
+            //set max force to move force and it keeps about the same
+            //set to zero vector at end of this if you want to just stop. or could set velocity lower?like 0.1?
             yield return new WaitForFixedUpdate();
         }
     }
