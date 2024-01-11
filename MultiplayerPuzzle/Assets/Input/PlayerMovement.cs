@@ -8,8 +8,8 @@ using UnityEngine.InputSystem.Processors;
 public class PlayerMovement : NetworkBehaviour
 {
     PlayerInput m_input;
-    Vector3 m_moveDirection;
-    [SerializeField] AnimationCurve m_forceAdjust;
+    Vector2 m_moveDirection;
+    //[SerializeField] AnimationCurve m_forceAdjust;
     [SerializeField] float m_moveForce;
     [SerializeField] float maxSpeed;
     Rigidbody2D m_rigidbody;
@@ -26,7 +26,6 @@ public class PlayerMovement : NetworkBehaviour
     void MoveStart(InputAction.CallbackContext context)
     {
         m_moveDirection = context.ReadValue<Vector2>();
-        m_moveDirection = new Vector3(m_moveDirection.x, 0f, m_moveDirection.y);
         StartCoroutine(Move());
     }
 
@@ -38,14 +37,15 @@ public class PlayerMovement : NetworkBehaviour
     IEnumerator Move()
     {
         
-        while(m_moveDirection != Vector3.zero)
+        while(m_moveDirection != Vector2.zero)
         {
             Debug.Log(m_moveDirection);
-            transform.position += m_moveDirection;
-            //m_rigidbody.AddForce( m_moveForce * Time.fixedDeltaTime * m_moveDirection);
+            m_rigidbody.AddForce( m_moveForce * Time.fixedDeltaTime * m_moveDirection);
+            m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, maxSpeed);
             //set max force to move force and it keeps about the same
             //set to zero vector at end of this if you want to just stop. or could set velocity lower?like 0.1?
             yield return new WaitForFixedUpdate();
         }
+        m_rigidbody.velocity = Vector2.zero;
     }
 }
