@@ -25,12 +25,14 @@ public class PlayerMovement : NetworkBehaviour
 
     void MoveStart(InputAction.CallbackContext context)
     {
+        if (!IsOwner) { return;  }
         m_moveDirection = context.ReadValue<Vector2>();
         StartCoroutine(Move());
     }
 
     void MoveEnd(InputAction.CallbackContext context)
     {
+        if (!IsOwner) { return; }
         m_moveDirection = Vector2.zero;
     }
 
