@@ -1,0 +1,11 @@
+things to do 
+have the server see clients 
+set up so server and cleinrt rpcs work 
+do movement via server and client rpcs
+send tranform data over instead of trying to get it to do the rigibody?
+
+untested 
+cleint moves through server 
+
+done 
+working server rpc
