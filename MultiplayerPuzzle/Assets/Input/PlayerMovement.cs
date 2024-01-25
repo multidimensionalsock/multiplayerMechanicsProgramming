@@ -14,6 +14,7 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] float maxSpeed;
     Rigidbody2D m_rigidbody;
     int rasndom;
+    [SerializeField] GameObject m_attackObject;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class PlayerMovement : NetworkBehaviour
         m_rigidbody = GetComponent<Rigidbody2D>();
         m_input.currentActionMap.FindAction("Move").performed += MoveStart;
         m_input.currentActionMap.FindAction("Move").canceled += MoveEnd;
+        m_input.currentActionMap.FindAction("Attack").performed += Attack;
         rasndom = Random.Range(0, 100);
     }
 
@@ -39,8 +41,22 @@ public class PlayerMovement : NetworkBehaviour
         m_moveDirection = Vector2.zero;
     }
 
+    void Attack(InputAction.CallbackContext context)
+    {
+        if (!IsLocalPlayer) { return; };
+        CreateGameObjectServerRPC();
+    }
+
+    [ServerRpc]
+    void CreateGameObjectServerRPC()
+    {
+        GameObject projectile = Instantiate(m_attackObject, transform.position, transform.rotation);
+        projectile.GetComponent<NetworkObject>().Spawn();
+    }
+
     IEnumerator Move()
     {
+        Debug.Log(m_moveDirection);
         while(m_moveDirection != Vector2.zero)
         {
             Debug.Log(m_moveDirection);
