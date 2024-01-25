@@ -52,6 +52,7 @@ public class PlayerMovement : NetworkBehaviour
     {
         GameObject projectile = Instantiate(m_attackObject, transform.position, transform.rotation);
         projectile.GetComponent<NetworkObject>().Spawn();
+        projectile.GetComponent<Rigidbody2D>().velocity = Vector2.up * 1f;
     }
 
     IEnumerator Move()
@@ -64,8 +65,6 @@ public class PlayerMovement : NetworkBehaviour
             m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, maxSpeed);
 
             MoveCharacterServerRpc(m_rigidbody.velocity);
-            //set max force to move force and it keeps about the same
-            //set to zero vector at end of this if you want to just stop. or could set velocity lower?like 0.1?
             yield return new WaitForFixedUpdate();
         }
         m_rigidbody.velocity = Vector2.zero;
