@@ -52,7 +52,7 @@ public class PlayerMovement : NetworkBehaviour
     {
         GameObject projectile = Instantiate(m_attackObject, transform.position, transform.rotation);
         projectile.GetComponent<NetworkObject>().Spawn();
-        projectile.GetComponent<Rigidbody2D>().velocity = Vector2.up * 1f;
+        projectile.GetComponent<Rigidbody2D>().velocity = m_moveDirection * 1f;
     }
 
     IEnumerator Move()
