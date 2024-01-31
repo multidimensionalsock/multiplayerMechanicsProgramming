@@ -10,24 +10,33 @@ public class MovingPlatform : NetworkBehaviour
     GameObject movingBlock;
     [SerializeField] float speed;
     // Start is called before the first frame update
-    void Start()
+    public override void OnNetworkSpawn()
     {
         positionsToMoveTo = GetComponentsInChildren<Transform>();
         movingBlock = transform.GetChild(0).gameObject;
         aimPos = 1; //skip child 0 (the actual block)
+        StartCoroutine(MoveBlock());
     }
 
-    private void FixedUpdate()
+    IEnumerator MoveBlock()
     {
-        movingBlock.transform.position = Vector2.MoveTowards(movingBlock.transform.position, positionsToMoveTo[aimPos].position, speed * Time.fixedDeltaTime);
-
-        if (movingBlock.transform.position == positionsToMoveTo[aimPos].position)
+        Debug.Log("go");
+        while (1 == 1)
         {
-            aimPos++;
-            if (aimPos >= positionsToMoveTo.Length)
+            movingBlock.transform.position = Vector2.MoveTowards(movingBlock.transform.position, positionsToMoveTo[aimPos].position, speed * Time.fixedDeltaTime);
+
+            if (movingBlock.transform.position == positionsToMoveTo[aimPos].position)
             {
-                aimPos = 1;
+                aimPos++;
+                if (aimPos >= positionsToMoveTo.Length)
+                {
+                    aimPos = 1;
+                }
             }
+            yield return new WaitForFixedUpdate();
         }
+
+        
     }
+
 }
