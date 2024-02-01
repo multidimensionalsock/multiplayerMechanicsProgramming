@@ -12,7 +12,7 @@ public class MovingPlatform : NetworkBehaviour
 	// Start is called before the first frame update
 	public override void OnNetworkSpawn()
 	{
-		if (!IsOwner) return;
+		//if (!IsOwner) return;
         positionsToMoveTo = GetComponentsInChildren<Transform>();
         movingBlock = transform.GetChild(0).gameObject;
         aimPos = 1;
