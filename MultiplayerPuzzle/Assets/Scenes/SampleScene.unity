@@ -1026,7 +1026,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 521196613459806425, guid: cd52159bac152104581eb928ce99a2a7, type: 3}
       propertyPath: m_SortingOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2394749559426868400, guid: cd52159bac152104581eb928ce99a2a7, type: 3}
       propertyPath: InLocalSpace
@@ -1042,6 +1042,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3355999312826666021, guid: cd52159bac152104581eb928ce99a2a7, type: 3}
       propertyPath: ActiveSceneSynchronization
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441949268703316939, guid: cd52159bac152104581eb928ce99a2a7, type: 3}
+      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8328151236981509448, guid: cd52159bac152104581eb928ce99a2a7, type: 3}
@@ -1088,7 +1092,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7157814757872505775, guid: cd52159bac152104581eb928ce99a2a7, type: 3}
     m_RemovedGameObjects:
     - {fileID: -7483202390058136200, guid: cd52159bac152104581eb928ce99a2a7, type: 3}
     m_AddedGameObjects: []
