@@ -15,6 +15,8 @@ public class PlayerMovement : NetworkBehaviour
     Rigidbody2D m_rigidbody;
     int rasndom;
     [SerializeField] GameObject m_attackObject;
+    [SerializeField] float fireAttackCooldown;
+    bool canFireAttack = true;
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +46,18 @@ public class PlayerMovement : NetworkBehaviour
     void Attack(InputAction.CallbackContext context)
     {
         if (!IsLocalPlayer) { return; };
+        if (!canFireAttack) { return; }
         CreateGameObjectServerRPC();
+        StartCoroutine(
+        Cooldown(fireAttackCooldown));
+    }
+
+    //cooldown
+    IEnumerator Cooldown(float cooldownTime)
+    {
+        canFireAttack = false;
+        yield return new WaitForSecondsRealtime(cooldownTime);
+        canFireAttack = true;
     }
 
     [ServerRpc]
@@ -52,7 +65,9 @@ public class PlayerMovement : NetworkBehaviour
     {
         GameObject projectile = Instantiate(m_attackObject, transform.position, transform.rotation);
         projectile.GetComponent<NetworkObject>().Spawn();
+        
         projectile.GetComponent<Rigidbody2D>().velocity = m_moveDirection * 1f;
+        projectile.transform.rotation = Quaternion.Euler( new Vector3(0, 0, Vector2.Angle(Vector2.zero, m_moveDirection)));
     }
 
     IEnumerator Move()

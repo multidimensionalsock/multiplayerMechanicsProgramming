@@ -2,6 +2,11 @@ things to do
 animation 
 having attacks effect things 
 fix layering issue 
+portals
+buttons
+things only cat can go under 
+camera
+rotate fireball to player dir 
 
 untested 
 
@@ -9,3 +14,6 @@ untested
 done 
 moving platofrm 
 stand on moving platoform 
+pushabe objects 
+burnable plants 
+fire attack cooldown
