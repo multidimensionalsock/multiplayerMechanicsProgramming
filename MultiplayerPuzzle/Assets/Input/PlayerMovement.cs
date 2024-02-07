@@ -13,27 +13,31 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] float m_moveForce;
     [SerializeField] float maxSpeed;
     Rigidbody2D m_rigidbody;
-    int rasndom;
     [SerializeField] GameObject m_attackObject;
     [SerializeField] float fireAttackCooldown;
     bool canFireAttack = true;
+    Vector2 facingDirection;
 
     // Start is called before the first frame update
     void Start()
     {
-        PingServerRpc();
+        if(!IsLocalPlayer) { return; }
         m_input = GetComponent<PlayerInput>();
         m_rigidbody = GetComponent<Rigidbody2D>();
         m_input.currentActionMap.FindAction("Move").performed += MoveStart;
         m_input.currentActionMap.FindAction("Move").canceled += MoveEnd;
         m_input.currentActionMap.FindAction("Attack").performed += Attack;
-        rasndom = Random.Range(0, 100);
+
+        transform.GetChild(0).GetComponent<Camera>().enabled = true;
+
+        
     }
 
     void MoveStart(InputAction.CallbackContext context)
     {
         if (!IsLocalPlayer) { return;  }
         m_moveDirection = context.ReadValue<Vector2>();
+        facingDirection = m_moveDirection;
         StartCoroutine(Move());
     }
 
@@ -66,7 +70,7 @@ public class PlayerMovement : NetworkBehaviour
         GameObject projectile = Instantiate(m_attackObject, transform.position, transform.rotation);
         projectile.GetComponent<NetworkObject>().Spawn();
         
-        projectile.GetComponent<Rigidbody2D>().velocity = m_moveDirection * 1f;
+        projectile.GetComponent<Rigidbody2D>().velocity = facingDirection * 1f;
         projectile.transform.rotation = Quaternion.Euler( new Vector3(0, 0, Vector2.Angle(Vector2.zero, m_moveDirection)));
     }
 
@@ -92,9 +96,4 @@ public class PlayerMovement : NetworkBehaviour
         m_rigidbody.velocity = velocity;
     }
 
-    [ServerRpc]
-    public void PingServerRpc()
-    {
-        Debug.Log("Working on the server" + rasndom);
-    }
 }
