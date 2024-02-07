@@ -119,4 +119,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   human: {fileID: 7104470959223384870, guid: bb8adccd632ff2f4f93649a76630fba2, type: 3}
-  cat: {fileID: 2297099966894642218, guid: 6580eba1eabf9f74ab9cf5740441d8bd, type: 3}
+  cat: {fileID: 6670435240557642643, guid: 6580eba1eabf9f74ab9cf5740441d8bd, type: 3}

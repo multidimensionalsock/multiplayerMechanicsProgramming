@@ -22,7 +22,7 @@ public class PlayerMovement : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        localObj = spawningObject.GetComponent<PlayerClassSelector>().IsLocalPlayer; //spawning object is null so ntohing under it is called? 
+        localObj = spawningObject.GetComponent<PlayerClassSelector>().IsLocalPlayer; //spawning object is null on cat so ntohing under it is called? 
         if (!localObj) { return; }
         m_input = GetComponent<PlayerInput>();
         m_input.enabled = true;

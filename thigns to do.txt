@@ -10,7 +10,7 @@ puzzle design
 cat can move floating but plaer can move boxes???
 cat is the magic one??
 cat can jump??
-get host to be human and client to be cat
+player moves but cat doesnt 
 
 untested 
 
