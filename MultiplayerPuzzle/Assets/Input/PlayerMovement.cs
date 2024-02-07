@@ -7,16 +7,14 @@ using UnityEngine.InputSystem.Processors;
 
 public class PlayerMovement : NetworkBehaviour
 {
-    PlayerInput m_input;
-    Vector2 m_moveDirection;
+    protected PlayerInput m_input;
+    protected Vector2 m_moveDirection;
     //[SerializeField] AnimationCurve m_forceAdjust;
-    [SerializeField] float m_moveForce;
-    [SerializeField] float maxSpeed;
-    Rigidbody2D m_rigidbody;
-    [SerializeField] GameObject m_attackObject;
-    [SerializeField] float fireAttackCooldown;
-    bool canFireAttack = true;
-    Vector2 facingDirection;
+    [SerializeField] protected float m_moveForce;
+    [SerializeField] protected float maxSpeed;
+    protected Rigidbody2D m_rigidbody;
+    
+    protected Vector2 facingDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -29,11 +27,9 @@ public class PlayerMovement : NetworkBehaviour
         m_input.currentActionMap.FindAction("Attack").performed += Attack;
 
         transform.GetChild(0).GetComponent<Camera>().enabled = true;
-
-        
     }
 
-    void MoveStart(InputAction.CallbackContext context)
+    protected void MoveStart(InputAction.CallbackContext context)
     {
         if (!IsLocalPlayer) { return;  }
         m_moveDirection = context.ReadValue<Vector2>();
@@ -41,37 +37,15 @@ public class PlayerMovement : NetworkBehaviour
         StartCoroutine(Move());
     }
 
-    void MoveEnd(InputAction.CallbackContext context)
+    protected void MoveEnd(InputAction.CallbackContext context)
     {
         if (!IsLocalPlayer) { return; }
         m_moveDirection = Vector2.zero;
     }
 
-    void Attack(InputAction.CallbackContext context)
+    protected virtual void Attack(InputAction.CallbackContext context)
     {
         if (!IsLocalPlayer) { return; };
-        if (!canFireAttack) { return; }
-        CreateGameObjectServerRPC();
-        StartCoroutine(
-        Cooldown(fireAttackCooldown));
-    }
-
-    //cooldown
-    IEnumerator Cooldown(float cooldownTime)
-    {
-        canFireAttack = false;
-        yield return new WaitForSecondsRealtime(cooldownTime);
-        canFireAttack = true;
-    }
-
-    [ServerRpc]
-    void CreateGameObjectServerRPC()
-    {
-        GameObject projectile = Instantiate(m_attackObject, transform.position, transform.rotation);
-        projectile.GetComponent<NetworkObject>().Spawn();
-        
-        projectile.GetComponent<Rigidbody2D>().velocity = facingDirection * 1f;
-        projectile.transform.rotation = Quaternion.Euler( new Vector3(0, 0, Vector2.Angle(Vector2.zero, m_moveDirection)));
     }
 
     IEnumerator Move()

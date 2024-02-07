@@ -66,8 +66,8 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 0.4869847
-  orthographic: 1
+  field of view: 4.6
+  orthographic: 0
   orthographic size: 5
   m_Depth: 20
   m_CullingMask:
@@ -103,11 +103,11 @@ GameObject:
   - component: {fileID: 6565860128039424557}
   - component: {fileID: 6142041751943001689}
   - component: {fileID: 1737242690903586937}
-  - component: {fileID: -4848570501249316434}
   - component: {fileID: -4872842794733857089}
   - component: {fileID: 8534862109854077926}
   - component: {fileID: -5400590276517035953}
   - component: {fileID: 1709486840311747887}
+  - component: {fileID: 7092462740864393800}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -203,22 +203,6 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &-4848570501249316434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7104470959223384870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca3b88feb1463ed4595480605ac84daa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_moveForce: 10
-  maxSpeed: 6
-  m_attackObject: {fileID: 5846143237335338091, guid: e99b87b14a6a1bf4b94ffc59540d79d1, type: 3}
-  fireAttackCooldown: 2
 --- !u!114 &-4872842794733857089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,3 +325,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0.007677698, y: -0.016751695}
   m_Size: {x: 0.13047071, y: 0.3328866}
   m_Direction: 0
+--- !u!114 &7092462740864393800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7104470959223384870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d99a6bca5865f944b6903a82fc331b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_moveForce: 3
+  maxSpeed: 3
+  m_attackObject: {fileID: 5846143237335338091, guid: e99b87b14a6a1bf4b94ffc59540d79d1, type: 3}
+  fireAttackCooldown: 3
