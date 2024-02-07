@@ -242,7 +242,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 287.99997, y: 0}
+  m_AnchoredPosition: {x: -155.7, y: 155.9}
   m_SizeDelta: {x: -640, y: -420}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &497360300
@@ -364,7 +364,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 287.99997, y: 0}
+  m_AnchoredPosition: {x: 287.99997, y: 191.9}
   m_SizeDelta: {x: -640, y: -420}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &667413013
@@ -619,10 +619,10 @@ RectTransform:
   m_Father: {fileID: 1945707558}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 288, y: 0}
-  m_SizeDelta: {x: -640, y: -420}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 88, y: 153}
+  m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1242163407
 GameObject:
@@ -684,7 +684,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1242163408}
-    PlayerPrefab: {fileID: 7104470959223384870, guid: bb8adccd632ff2f4f93649a76630fba2, type: 3}
+    PlayerPrefab: {fileID: 6228486230148919081, guid: 23da53b2d7d630d49a4c576bb358d779, type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: e80e4c9d49c30a6448132bd857a036c7, type: 2}
@@ -1172,7 +1172,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.5, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1969307693

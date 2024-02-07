@@ -13,14 +13,19 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] protected float m_moveForce;
     [SerializeField] protected float maxSpeed;
     protected Rigidbody2D m_rigidbody;
-    
+    public GameObject spawningObject;
+    protected bool localObj; 
+
     protected Vector2 facingDirection;
 
     // Start is called before the first frame update
-    void Start()
+
+    public override void OnNetworkSpawn()
     {
-        if(!IsLocalPlayer) { return; }
+        localObj = spawningObject.GetComponent<PlayerClassSelector>().IsLocalPlayer; //spawning object is null so ntohing under it is called? 
+        if (!localObj) { return; }
         m_input = GetComponent<PlayerInput>();
+        m_input.enabled = true;
         m_rigidbody = GetComponent<Rigidbody2D>();
         m_input.currentActionMap.FindAction("Move").performed += MoveStart;
         m_input.currentActionMap.FindAction("Move").canceled += MoveEnd;
@@ -31,7 +36,7 @@ public class PlayerMovement : NetworkBehaviour
 
     protected void MoveStart(InputAction.CallbackContext context)
     {
-        if (!IsLocalPlayer) { return;  }
+        if (!localObj) { return;  }
         m_moveDirection = context.ReadValue<Vector2>();
         facingDirection = m_moveDirection;
         StartCoroutine(Move());
@@ -39,13 +44,13 @@ public class PlayerMovement : NetworkBehaviour
 
     protected void MoveEnd(InputAction.CallbackContext context)
     {
-        if (!IsLocalPlayer) { return; }
+        if (!localObj) { return; }
         m_moveDirection = Vector2.zero;
     }
 
     protected virtual void Attack(InputAction.CallbackContext context)
     {
-        if (!IsLocalPlayer) { return; };
+        if (!localObj) { return; };
     }
 
     IEnumerator Move()

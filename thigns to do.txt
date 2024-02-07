@@ -3,14 +3,14 @@ animation
 fix layering issue 
 portals
 buttons
-things only cat can go under 
-camera too zoomed in
+things only cat can go under (collision layer set up)
 rotate fireball to player dir 
 make fireball faster 
 puzzle design
 cat can move floating but plaer can move boxes???
 cat is the magic one??
 cat can jump??
+get host to be human and client to be cat
 
 untested 
 
