@@ -24,7 +24,7 @@ public class NetworkButtons : NetworkBehaviour
         ClientBtn.onClick.AddListener( () => { NetworkManager.Singleton.StartClient(); CreateClientServerRpc(); });
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void CreateHostServerRpc()
     {
         GameObject player = Instantiate(HostPrefab, Vector3.zero, Quaternion.identity);
@@ -35,7 +35,7 @@ public class NetworkButtons : NetworkBehaviour
 
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void CreateClientServerRpc()
     {
         GameObject player = Instantiate(HostPrefab, Vector3.zero, Quaternion.identity);

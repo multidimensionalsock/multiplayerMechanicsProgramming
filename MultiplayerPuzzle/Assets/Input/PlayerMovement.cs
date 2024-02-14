@@ -47,7 +47,7 @@ public class PlayerMovement : NetworkBehaviour
         PassDirectionalDataServerRpc(m_clientID);
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     void PassDirectionalDataServerRpc(ulong clientID)
     {
         Debug.Log(gameInfo.playerList);
