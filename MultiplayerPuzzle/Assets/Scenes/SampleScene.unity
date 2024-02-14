@@ -1108,7 +1108,7 @@ MonoBehaviour:
   HostBtn: {fileID: 722797353}
   ServerBtn: {fileID: 497360301}
   ClientBtn: {fileID: 71373799}
-  HostPrefab: {fileID: 7104470959223384870, guid: bb8adccd632ff2f4f93649a76630fba2, type: 3}
+  HostPrefab: {fileID: 6670435240557642643, guid: 6580eba1eabf9f74ab9cf5740441d8bd, type: 3}
   ClientPrefab: {fileID: 6670435240557642643, guid: 6580eba1eabf9f74ab9cf5740441d8bd, type: 3}
   gameInfo: {fileID: 1647748324}
 --- !u!114 &1945707555

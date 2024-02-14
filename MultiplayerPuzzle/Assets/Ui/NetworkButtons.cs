@@ -21,7 +21,8 @@ public class NetworkButtons : NetworkBehaviour
         ClientID = (ulong)Random.Range(0, 10000);
         HostBtn.onClick.AddListener( () => { NetworkManager.Singleton.StartHost(); CreateHostServerRpc(); });
         ServerBtn.onClick.AddListener( () => { NetworkManager.Singleton.StartServer(); });
-        ClientBtn.onClick.AddListener( () => { NetworkManager.Singleton.StartClient(); CreateClientServerRpc(); });
+        ClientBtn.onClick.AddListener( () => { 
+            NetworkManager.Singleton.StartClient(); CreateClientServerRpc(); });
     }
 
     [ServerRpc(RequireOwnership = false)]

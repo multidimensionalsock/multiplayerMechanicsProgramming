@@ -31,7 +31,7 @@ public class PlayerMovement : NetworkBehaviour
         m_input.currentActionMap.FindAction("Move").canceled += MoveEnd;
         m_input.currentActionMap.FindAction("Attack").performed += Attack;
 
-        transform.GetChild(0).GetComponent<Camera>().enabled = true;
+        //transform.GetChild(0).GetComponent<Camera>().enabled = true;
     }
 
     protected void MoveStart(InputAction.CallbackContext context)
