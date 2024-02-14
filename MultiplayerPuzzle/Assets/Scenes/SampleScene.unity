@@ -242,7 +242,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -155.7, y: 155.9}
+  m_AnchoredPosition: {x: -155.7, y: 155.90039}
   m_SizeDelta: {x: -640, y: -420}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &497360300
@@ -364,7 +364,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 287.99997, y: 191.9}
+  m_AnchoredPosition: {x: 287.99997, y: 191.90039}
   m_SizeDelta: {x: -640, y: -420}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &667413013
@@ -684,7 +684,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1242163408}
-    PlayerPrefab: {fileID: 6228486230148919081, guid: 23da53b2d7d630d49a4c576bb358d779, type: 3}
+    PlayerPrefab: {fileID: 0}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: e80e4c9d49c30a6448132bd857a036c7, type: 2}
@@ -934,7 +934,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1667756513}
   - component: {fileID: 1667756512}
-  - component: {fileID: 1667756511}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -942,14 +941,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1667756511
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1667756510}
-  m_Enabled: 1
 --- !u!20 &1667756512
 Camera:
   m_ObjectHideFlags: 0
@@ -1028,6 +1019,7 @@ GameObject:
   - component: {fileID: 1945707557}
   - component: {fileID: 1945707556}
   - component: {fileID: 1945707555}
+  - component: {fileID: 1945707559}
   - component: {fileID: 1945707554}
   m_Layer: 5
   m_Name: Canvas
@@ -1051,6 +1043,8 @@ MonoBehaviour:
   HostBtn: {fileID: 722797353}
   ServerBtn: {fileID: 497360301}
   ClientBtn: {fileID: 71373799}
+  HostPrefab: {fileID: 7104470959223384870, guid: bb8adccd632ff2f4f93649a76630fba2, type: 3}
+  ClientPrefab: {fileID: 6670435240557642643, guid: 6580eba1eabf9f74ab9cf5740441d8bd, type: 3}
 --- !u!114 &1945707555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1137,6 +1131,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1945707559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945707553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2706868959
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1969307691
 GameObject:
   m_ObjectHideFlags: 0

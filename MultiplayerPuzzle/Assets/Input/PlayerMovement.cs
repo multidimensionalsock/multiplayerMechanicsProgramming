@@ -8,22 +8,22 @@ using UnityEngine.InputSystem.Processors;
 public class PlayerMovement : NetworkBehaviour
 {
     protected PlayerInput m_input;
-    protected Vector2 m_moveDirection;
+    public Vector2 m_moveDirection;
     //[SerializeField] AnimationCurve m_forceAdjust;
     [SerializeField] protected float m_moveForce;
     [SerializeField] protected float maxSpeed;
     protected Rigidbody2D m_rigidbody;
     public GameObject spawningObject;
-    protected bool localObj; 
+    protected bool localObj;
+    [SerializeField] GameInfo gameInfo;
 
     protected Vector2 facingDirection;
+    public ulong m_clientID;
 
     // Start is called before the first frame update
 
     public override void OnNetworkSpawn()
     {
-        localObj = spawningObject.GetComponent<PlayerClassSelector>().IsLocalPlayer; //spawning object is null on cat so ntohing under it is called? 
-        if (!localObj) { return; }
         m_input = GetComponent<PlayerInput>();
         m_input.enabled = true;
         m_rigidbody = GetComponent<Rigidbody2D>();
@@ -36,43 +36,50 @@ public class PlayerMovement : NetworkBehaviour
 
     protected void MoveStart(InputAction.CallbackContext context)
     {
-        if (!localObj) { return;  }
         m_moveDirection = context.ReadValue<Vector2>();
-        facingDirection = m_moveDirection;
-        StartCoroutine(Move());
+        PassDirectionalDataServerRpc(m_clientID);
     }
+
 
     protected void MoveEnd(InputAction.CallbackContext context)
     {
-        if (!localObj) { return; }
         m_moveDirection = Vector2.zero;
-    }
-
-    protected virtual void Attack(InputAction.CallbackContext context)
-    {
-        if (!localObj) { return; };
-    }
-
-    IEnumerator Move()
-    {
-        Debug.Log(m_moveDirection);
-        while(m_moveDirection != Vector2.zero)
-        {
-            Debug.Log(m_moveDirection);
-            m_rigidbody.AddForce(m_moveForce * Time.fixedDeltaTime * m_moveDirection);
-            m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, maxSpeed);
-
-            MoveCharacterServerRpc(m_rigidbody.velocity);
-            yield return new WaitForFixedUpdate();
-        }
-        m_rigidbody.velocity = Vector2.zero;
-        MoveCharacterServerRpc(m_rigidbody.velocity);
+        PassDirectionalDataServerRpc(m_clientID);
     }
 
     [ServerRpc]
-    void MoveCharacterServerRpc(Vector2 velocity)
-    {;
-        m_rigidbody.velocity = velocity;
+    void PassDirectionalDataServerRpc(ulong clientID)
+    {
+        GameObject player = gameInfo.playerList[clientID];
+        player.GetComponent<PlayerMovement>().m_moveDirection = m_moveDirection;
+    }
+
+
+    protected virtual void Attack(InputAction.CallbackContext context)
+    {
+    }
+
+    //IEnumerator Move()
+    //{
+    //    Debug.Log(m_moveDirection);
+    //    while(m_moveDirection != Vector2.zero)
+    //    {
+    //        Debug.Log(m_moveDirection);
+    //        m_rigidbody.AddForce(m_moveForce * Time.fixedDeltaTime * m_moveDirection);
+    //        m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, maxSpeed);
+
+    //        yield return new WaitForFixedUpdate();
+    //    }
+    //    m_rigidbody.velocity = Vector2.zero;
+    //}
+
+    private void FixedUpdate()
+    {
+        if (m_moveDirection != Vector2.zero)
+        {
+            m_rigidbody.AddForce(m_moveForce * Time.fixedDeltaTime * m_moveDirection);
+        }
+        m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, maxSpeed);
     }
 
 }
