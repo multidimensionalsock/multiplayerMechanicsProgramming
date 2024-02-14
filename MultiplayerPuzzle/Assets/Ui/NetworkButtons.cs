@@ -14,35 +14,38 @@ public class NetworkButtons : NetworkBehaviour
     [SerializeField] GameObject ClientPrefab;
     [SerializeField] GameInfo gameInfo;
 
-    ulong ClientID;
+    ulong ClientID = 0;
 
     private void Awake()
     {
-        ClientID = (ulong)Random.Range(0, 10000);
+        ClientID = (ulong)Random.Range(1, 10000);
+        gameInfo.clientID = ClientID;
         HostBtn.onClick.AddListener( () => { NetworkManager.Singleton.StartHost(); CreateHostServerRpc(); });
         ServerBtn.onClick.AddListener( () => { NetworkManager.Singleton.StartServer(); });
         ClientBtn.onClick.AddListener( () => { 
-            NetworkManager.Singleton.StartClient(); CreateClientServerRpc(); });
+        NetworkManager.Singleton.StartClient(); CreateClientServerRpc(); });
     }
 
     [ServerRpc(RequireOwnership = false)]
     private void CreateHostServerRpc()
     {
+        gameObject.SetActive(false);
         GameObject player = Instantiate(HostPrefab, Vector3.zero, Quaternion.identity);
-        player.GetComponent<NetworkObject>().Spawn();
-        gameInfo.AddPlayer(ClientID, player);
-        player.GetComponent<PlayerMovement>().m_clientID = ClientID;
         player.GetComponent<PlayerMovement>().gameInfo = gameInfo;
-
+        gameInfo.AddPlayer(ClientID, player);
+        player.GetComponent<NetworkObject>().Spawn();
+        player.GetComponent<PlayerMovement>().m_clientID = ClientID;
     }
 
     [ServerRpc(RequireOwnership = false)]
     private void CreateClientServerRpc()
     {
+        gameObject.SetActive(false);
         GameObject player = Instantiate(HostPrefab, Vector3.zero, Quaternion.identity);
-        player.GetComponent<NetworkObject>().Spawn();
-        gameInfo.AddPlayer(ClientID, player);
-        player.GetComponent<PlayerMovement>().m_clientID = ClientID;
         player.GetComponent<PlayerMovement>().gameInfo = gameInfo;
+        gameInfo.AddPlayer(ClientID, player);
+        player.GetComponent<NetworkObject>().Spawn();
+        player.GetComponent<PlayerMovement>().m_clientID = ClientID;
     }
+
 }

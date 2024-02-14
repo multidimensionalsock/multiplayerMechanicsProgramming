@@ -18,15 +18,17 @@ public class PlayerMovement : NetworkBehaviour
     public GameInfo gameInfo;
 
     protected Vector2 facingDirection;
-    public ulong m_clientID;
+    public ulong m_clientID = 0;
 
     // Start is called before the first frame update
 
     public override void OnNetworkSpawn()
     {
+        m_rigidbody = GetComponent<Rigidbody2D>();
+        if (gameInfo.clientID != m_clientID) return;
         m_input = GetComponent<PlayerInput>();
         m_input.enabled = true;
-        m_rigidbody = GetComponent<Rigidbody2D>();
+        
         m_input.currentActionMap.FindAction("Move").performed += MoveStart;
         m_input.currentActionMap.FindAction("Move").canceled += MoveEnd;
         m_input.currentActionMap.FindAction("Attack").performed += Attack;
@@ -60,22 +62,9 @@ public class PlayerMovement : NetworkBehaviour
     {
     }
 
-    //IEnumerator Move()
-    //{
-    //    Debug.Log(m_moveDirection);
-    //    while(m_moveDirection != Vector2.zero)
-    //    {
-    //        Debug.Log(m_moveDirection);
-    //        m_rigidbody.AddForce(m_moveForce * Time.fixedDeltaTime * m_moveDirection);
-    //        m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, maxSpeed);
-
-    //        yield return new WaitForFixedUpdate();
-    //    }
-    //    m_rigidbody.velocity = Vector2.zero;
-    //}
-
     private void FixedUpdate()
     {
+        if (!IsServer) return;
         if (m_moveDirection != Vector2.zero)
         {
             m_rigidbody.AddForce(m_moveForce * Time.fixedDeltaTime * m_moveDirection);
