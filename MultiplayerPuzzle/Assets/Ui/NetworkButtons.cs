@@ -12,6 +12,7 @@ public class NetworkButtons : NetworkBehaviour
 
     [SerializeField] GameObject HostPrefab;
     [SerializeField] GameObject ClientPrefab;
+    [SerializeField] GameInfo gameInfo;
 
     ulong ClientID;
 
@@ -28,7 +29,9 @@ public class NetworkButtons : NetworkBehaviour
     {
         GameObject player = Instantiate(HostPrefab, Vector3.zero, Quaternion.identity);
         player.GetComponent<NetworkObject>().Spawn();
+        gameInfo.AddPlayer(ClientID, player);
         player.GetComponent<PlayerMovement>().m_clientID = ClientID;
+        player.GetComponent<PlayerMovement>().gameInfo = gameInfo;
 
     }
 
@@ -37,6 +40,8 @@ public class NetworkButtons : NetworkBehaviour
     {
         GameObject player = Instantiate(HostPrefab, Vector3.zero, Quaternion.identity);
         player.GetComponent<NetworkObject>().Spawn();
+        gameInfo.AddPlayer(ClientID, player);
         player.GetComponent<PlayerMovement>().m_clientID = ClientID;
+        player.GetComponent<PlayerMovement>().gameInfo = gameInfo;
     }
 }

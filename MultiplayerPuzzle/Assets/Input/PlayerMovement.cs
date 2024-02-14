@@ -15,7 +15,7 @@ public class PlayerMovement : NetworkBehaviour
     protected Rigidbody2D m_rigidbody;
     public GameObject spawningObject;
     protected bool localObj;
-    [SerializeField] GameInfo gameInfo;
+    public GameInfo gameInfo;
 
     protected Vector2 facingDirection;
     public ulong m_clientID;
@@ -50,6 +50,7 @@ public class PlayerMovement : NetworkBehaviour
     [ServerRpc]
     void PassDirectionalDataServerRpc(ulong clientID)
     {
+        Debug.Log(gameInfo.playerList);
         GameObject player = gameInfo.playerList[clientID];
         player.GetComponent<PlayerMovement>().m_moveDirection = m_moveDirection;
     }
