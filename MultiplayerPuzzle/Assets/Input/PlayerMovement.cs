@@ -78,8 +78,11 @@ public class PlayerMovement : NetworkBehaviour
         if (m_moveDirection != Vector2.zero)
         {
             m_rigidbody.AddForce(m_moveForce * Time.fixedDeltaTime * m_moveDirection);
+            m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, maxSpeed);
+            return;
         }
-        m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, maxSpeed);
+        m_rigidbody.velocity = Vector2.zero;
+        
     }
 
 }
