@@ -94,11 +94,11 @@ GameObject:
   - component: {fileID: 8135863450617696039}
   - component: {fileID: 2508784229688854540}
   - component: {fileID: 585055927883382973}
-  - component: {fileID: 9001190079781392708}
   - component: {fileID: 8786993925146703362}
   - component: {fileID: 797971325044598543}
   - component: {fileID: 662808513503016176}
   - component: {fileID: 678551110743939227}
+  - component: {fileID: 1349088612621841729}
   m_Layer: 0
   m_Name: cat
   m_TagString: Untagged
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1631780252
+  GlobalObjectIdHash: 2422319889
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -194,24 +194,6 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &9001190079781392708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4194978201963408661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3eb29e082cd5ab40b2b1371b7f7cadd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_moveDirection: {x: 0, y: 0}
-  m_moveForce: 3
-  maxSpeed: 3
-  spawningObject: {fileID: 0}
-  gameInfo: {fileID: 0}
-  m_clientID: 0
 --- !u!114 &8786993925146703362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,3 +293,23 @@ MonoBehaviour:
   m_DefaultActionMap: Player1
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1349088612621841729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4194978201963408661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d99a6bca5865f944b6903a82fc331b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_moveDirection: {x: 0, y: 0}
+  m_moveForce: 20
+  maxSpeed: 20
+  spawningObject: {fileID: 0}
+  gameInfo: {fileID: 0}
+  m_clientID: 0
+  m_attackObject: {fileID: 0}
+  fireAttackCooldown: 0
