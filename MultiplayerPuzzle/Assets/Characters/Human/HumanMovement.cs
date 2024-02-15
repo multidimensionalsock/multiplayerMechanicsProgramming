@@ -11,14 +11,14 @@ public class HumanMovement : PlayerMovement
     [SerializeField] float fireAttackCooldown;
     bool canFireAttack = true;
     
-    protected override void Attack(InputAction.CallbackContext context)
-    {
-        //need to get if youre the local object via the thing that spawned it 
-        if (!localObj) { return; };
-        if (!canFireAttack) { return; }
-        CreateGameObjectServerRPC();
-        StartCoroutine(Cooldown(fireAttackCooldown));
-    }
+    //protected override void Attack(InputAction.CallbackContext context)
+    //{
+    //    //need to get if youre the local object via the thing that spawned it 
+    //    if (!localObj) { return; };
+    //    if (!canFireAttack) { return; }
+    //    CreateGameObjectServerRPC();
+    //    StartCoroutine(Cooldown(fireAttackCooldown));
+    //}
 
     [ServerRpc]
     void CreateGameObjectServerRPC()

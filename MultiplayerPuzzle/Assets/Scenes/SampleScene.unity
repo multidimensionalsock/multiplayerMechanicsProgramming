@@ -8273,6 +8273,14 @@ PrefabInstance:
       propertyPath: gameInfo
       value: 
       objectReference: {fileID: 1647748324}
+    - target: {fileID: 602051039560737648, guid: f82770723d23a74488dfbbbb1654a605, type: 3}
+      propertyPath: HostPrefab
+      value: 
+      objectReference: {fileID: 2894999081276086796, guid: bb8adccd632ff2f4f93649a76630fba2, type: 3}
+    - target: {fileID: 602051039560737648, guid: f82770723d23a74488dfbbbb1654a605, type: 3}
+      propertyPath: ClientPrefab
+      value: 
+      objectReference: {fileID: 2894999081276086796, guid: bb8adccd632ff2f4f93649a76630fba2, type: 3}
     - target: {fileID: 1896167422308846427, guid: f82770723d23a74488dfbbbb1654a605, type: 3}
       propertyPath: m_Pivot.x
       value: 0

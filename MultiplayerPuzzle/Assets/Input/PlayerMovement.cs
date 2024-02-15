@@ -24,8 +24,9 @@ public class PlayerMovement : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        transform.GetChild(0).gameObject.SetActive(false);
         m_rigidbody = GetComponent<Rigidbody2D>();
-        if (gameInfo.clientID != m_clientID) return;
+        if (!IsOwner) return;
         m_input = GetComponent<PlayerInput>();
         m_input.enabled = true;
         
@@ -33,46 +34,50 @@ public class PlayerMovement : NetworkBehaviour
         m_input.currentActionMap.FindAction("Move").canceled += MoveEnd;
         m_input.currentActionMap.FindAction("Attack").performed += Attack;
 
-        //transform.GetChild(0).GetComponent<Camera>().enabled = true;
+        transform.GetChild(0).gameObject.SetActive(true);
+        
     }
 
-    protected void MoveStart(InputAction.CallbackContext context)
+    void MoveStart(InputAction.CallbackContext context)
     {
+        if (!IsOwner) { return; }
         m_moveDirection = context.ReadValue<Vector2>();
-        PassDirectionalDataServerRpc(m_clientID);
+        StartCoroutine(Move());
     }
 
-
-    protected void MoveEnd(InputAction.CallbackContext context)
+    void MoveEnd(InputAction.CallbackContext context)
     {
+        if (!IsOwner) { return; }
         m_moveDirection = Vector2.zero;
-        PassDirectionalDataServerRpc(m_clientID);
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    void PassDirectionalDataServerRpc(ulong clientID)
-    {
-        Debug.Log(gameInfo.playerList);
-        GameObject player = gameInfo.playerList[clientID];
-        player.GetComponent<PlayerMovement>().m_moveDirection = m_moveDirection;
     }
 
 
-    protected virtual void Attack(InputAction.CallbackContext context)
+    void Attack(InputAction.CallbackContext context)
     {
+        if (!IsOwner) { return; };
     }
+    
 
-    private void FixedUpdate()
+    IEnumerator Move()
     {
-        if (!IsServer) return;
-        if (m_moveDirection != Vector2.zero)
+        Debug.Log(m_moveDirection);
+        while (m_moveDirection != Vector2.zero)
         {
+            Debug.Log(m_moveDirection);
             m_rigidbody.AddForce(m_moveForce * Time.fixedDeltaTime * m_moveDirection);
             m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, maxSpeed);
-            return;
+
+            MoveCharacterServerRpc(m_rigidbody.velocity);
+            yield return new WaitForFixedUpdate();
         }
         m_rigidbody.velocity = Vector2.zero;
-        
+        MoveCharacterServerRpc(m_rigidbody.velocity);
+    }
+
+    [ServerRpc]
+    void MoveCharacterServerRpc(Vector2 velocity)
+    {
+        m_rigidbody.velocity = velocity;
     }
 
 }

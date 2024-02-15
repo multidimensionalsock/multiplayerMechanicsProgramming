@@ -14,12 +14,10 @@ public class NetworkButtons : NetworkBehaviour
     [SerializeField] GameObject ClientPrefab;
     [SerializeField] GameInfo gameInfo;
 
-    ulong ClientID = 0;
+    //ulong ClientID = 0;
 
     private void Awake()
     {
-        ClientID = (ulong)Random.Range(1, 10000);
-        gameInfo.clientID = ClientID;
         HostBtn.onClick.AddListener( () => { NetworkManager.Singleton.StartHost(); CreateHostServerRpc(); });
         ServerBtn.onClick.AddListener( () => { NetworkManager.Singleton.StartServer(); });
         ClientBtn.onClick.AddListener( () => { 
@@ -27,25 +25,22 @@ public class NetworkButtons : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void CreateHostServerRpc()
+    private void CreateHostServerRpc(ServerRpcParams rpcParams = default)
     {
         gameObject.SetActive(false);
         GameObject player = Instantiate(HostPrefab, Vector3.zero, Quaternion.identity);
         player.GetComponent<PlayerMovement>().gameInfo = gameInfo;
-        gameInfo.AddPlayer(ClientID, player);
-        player.GetComponent<NetworkObject>().Spawn();
-        player.GetComponent<PlayerMovement>().m_clientID = ClientID;
+        //gameInfo.AddPlayer(ClientID, player);
+        player.GetComponent<NetworkObject>().SpawnWithOwnership(rpcParams.Receive.SenderClientId);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void CreateClientServerRpc()
+    private void CreateClientServerRpc(ServerRpcParams rpcParams = default)
     {
         gameObject.SetActive(false);
-        GameObject player = Instantiate(HostPrefab, Vector3.zero, Quaternion.identity);
+        GameObject player = Instantiate(ClientPrefab, Vector3.zero, Quaternion.identity);
         player.GetComponent<PlayerMovement>().gameInfo = gameInfo;
-        gameInfo.AddPlayer(ClientID, player);
-        player.GetComponent<NetworkObject>().Spawn();
-        player.GetComponent<PlayerMovement>().m_clientID = ClientID;
+        player.GetComponent<NetworkObject>().SpawnWithOwnership(rpcParams.Receive.SenderClientId);
     }
 
 }

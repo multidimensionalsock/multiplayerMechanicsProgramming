@@ -1,6 +1,5 @@
 things to do 
-swap characters 
-hostm moves both, cleint cant move 
+cat not spawing 
 
 
 
