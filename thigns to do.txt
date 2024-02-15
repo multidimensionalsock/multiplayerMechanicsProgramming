@@ -1,7 +1,5 @@
 things to do 
-cat not spawing 
-
-
+cat not moving but player human cleint does 
 
 animation 
 fix layering issue 
@@ -26,9 +24,7 @@ burnable plants
 fire attack cooldown
 fire move when player not moving 
 moving camera
-
 writ about - mechanics development
-
 fire bolt - the human player can fire a projectile now which can be used to burn plants when it collides to get through different areas. 
 stand on moving platform 
 pushable objects - there is now objects which can be pushed by the player that will be used to put pressure on buttons and things such as that in the puzzle. I'm still wondering whether this should be a human only ability or have it be for both the cat and human. 
@@ -36,7 +32,4 @@ burnable plants 
 fire attack cooldown
 fire move when player not moving 
 moving camera
-
-
-
 split into movement scripts 
