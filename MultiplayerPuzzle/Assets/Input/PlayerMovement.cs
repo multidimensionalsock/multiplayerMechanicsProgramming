@@ -26,7 +26,7 @@ public class PlayerMovement : NetworkBehaviour
     {
         transform.GetChild(0).gameObject.SetActive(false);
         m_rigidbody = GetComponent<Rigidbody2D>();
-        if (!IsOwner) return;
+        //if (!IsOwner) return;
         m_input = GetComponent<PlayerInput>();
         m_input.enabled = true;
         
@@ -38,27 +38,27 @@ public class PlayerMovement : NetworkBehaviour
         
     }
 
-    void MoveStart(InputAction.CallbackContext context)
+    protected void MoveStart(InputAction.CallbackContext context)
     {
         if (!IsOwner) { return; }
         m_moveDirection = context.ReadValue<Vector2>();
         StartCoroutine(Move());
     }
 
-    void MoveEnd(InputAction.CallbackContext context)
+    protected void MoveEnd(InputAction.CallbackContext context)
     {
         if (!IsOwner) { return; }
         m_moveDirection = Vector2.zero;
     }
 
 
-    void Attack(InputAction.CallbackContext context)
+    protected void Attack(InputAction.CallbackContext context)
     {
         if (!IsOwner) { return; };
     }
     
 
-    IEnumerator Move()
+    protected IEnumerator Move()
     {
         Debug.Log(m_moveDirection);
         while (m_moveDirection != Vector2.zero)
@@ -75,7 +75,7 @@ public class PlayerMovement : NetworkBehaviour
     }
 
     [ServerRpc]
-    void MoveCharacterServerRpc(Vector2 velocity)
+     protected void MoveCharacterServerRpc(Vector2 velocity)
     {
         m_rigidbody.velocity = velocity;
     }
