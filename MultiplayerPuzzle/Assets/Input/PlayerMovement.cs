@@ -26,7 +26,7 @@ public class PlayerMovement : NetworkBehaviour
     {
         transform.GetChild(0).gameObject.SetActive(false);
         m_rigidbody = GetComponent<Rigidbody2D>();
-        //if (!IsOwner) return;
+        if (!IsOwner) return;
         m_input = GetComponent<PlayerInput>();
         m_input.enabled = true;
         
