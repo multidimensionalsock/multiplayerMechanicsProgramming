@@ -52,7 +52,7 @@ public class PlayerMovement : NetworkBehaviour
     }
 
 
-    protected void Attack(InputAction.CallbackContext context)
+    protected virtual void Attack(InputAction.CallbackContext context)
     {
         if (!IsOwner) { return; };
     }
@@ -60,10 +60,8 @@ public class PlayerMovement : NetworkBehaviour
 
     protected IEnumerator Move()
     {
-        Debug.Log(m_moveDirection);
         while (m_moveDirection != Vector2.zero)
         {
-            Debug.Log(m_moveDirection);
             m_rigidbody.AddForce(m_moveForce * Time.fixedDeltaTime * m_moveDirection);
             m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, maxSpeed);
 

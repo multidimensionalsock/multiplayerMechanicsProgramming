@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6698754648640035877}
   - component: {fileID: 2893027506541114658}
   - component: {fileID: 59507315819974362}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 1995039525595426307}
   - component: {fileID: 2261904774450847285}
   - component: {fileID: 2407082845170488405}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1225122097
+  GlobalObjectIdHash: 82200593
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
