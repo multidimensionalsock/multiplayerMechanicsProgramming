@@ -7,6 +7,12 @@ using UnityEngine.InputSystem;
 public class CatMovement : PlayerMovement
 {
     GameObject magicPillarCollision = null;
+    GameObject teleporter = null;
+
+    private void Start()
+    {
+        Physics.IgnoreLayerCollision(8, 9, true);
+    }
 
     protected override void Attack(InputAction.CallbackContext context)
     {
@@ -15,23 +21,38 @@ public class CatMovement : PlayerMovement
             magicPillarCollision.GetComponent<magicalPillar>().TurnOnMagicalPillarServerRpc(); 
             //set to ingore collision now 
         }
+        if (teleporter != null )
+        {
+            teleporter.GetComponent<Teleport>().TeleportMe(gameObject);
+        }
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 10)
+        {
+            magicPillarCollision = collision.gameObject;
+
+        }
+        else if (collision.gameObject.layer == 11)
+        {
+            teleporter = collision.gameObject;
+        }
+    }
+
+
+    private void OnCollisionExit2D(Collision2D collision)
     {
         Debug.Log("collieding");
         if (collision.gameObject.layer == 10)
         {
-            magicPillarCollision = collision.gameObject;
-        }
-    }
+            magicPillarCollision = null;
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        //if (collision.gameObject.layer == 10)
-        //{
-        //    magicPillarCollision = null;
-        //}
+        }
+        else if (collision.gameObject.layer == 11)
+        {
+            teleporter = null;
+        }
     }
 }

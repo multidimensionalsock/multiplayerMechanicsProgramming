@@ -39,6 +39,9 @@ public class magicalPillar : NetworkBehaviour
     {
         isLit.Value = true;
         GetComponent<Animator>().SetBool("Lit", true);
+        Physics.IgnoreLayerCollision(8, 7);
+        gameObject.layer = 7;
+       
     }
 
     void LitValueChanged(bool prev, bool newval)
