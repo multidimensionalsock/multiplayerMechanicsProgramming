@@ -776,6 +776,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4647159727036719471, guid: e4fd01f275b724147aac034d9e8343b2, type: 3}
+      propertyPath: m_Animator
+      value: 
+      objectReference: {fileID: 508886089078360878}
     - target: {fileID: 8922776099951398098, guid: e4fd01f275b724147aac034d9e8343b2, type: 3}
       propertyPath: m_Name
       value: magicalPillar
@@ -813,6 +817,11 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!95 &508886089078360878 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5859735822839123314, guid: e4fd01f275b724147aac034d9e8343b2, type: 3}
+  m_PrefabInstance: {fileID: 508886089078360870}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &595960749255113267
 GameObject:
   m_ObjectHideFlags: 0
@@ -8556,6 +8565,10 @@ PrefabInstance:
       propertyPath: ClientPrefab
       value: 
       objectReference: {fileID: 4194978201963408661, guid: 6580eba1eabf9f74ab9cf5740441d8bd, type: 3}
+    - target: {fileID: 662381672496900138, guid: f82770723d23a74488dfbbbb1654a605, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -155.75
+      objectReference: {fileID: 0}
     - target: {fileID: 662381672496900138, guid: f82770723d23a74488dfbbbb1654a605, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0

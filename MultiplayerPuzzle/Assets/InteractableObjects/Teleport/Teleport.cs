@@ -14,7 +14,7 @@ public class Teleport : NetworkBehaviour
         teleportMeServerRpc();
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     void teleportMeServerRpc()
     {
         teleportobj.transform.position = teleportPoint.transform.position;

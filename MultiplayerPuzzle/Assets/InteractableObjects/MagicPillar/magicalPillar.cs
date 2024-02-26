@@ -50,9 +50,10 @@ public class magicalPillar : NetworkBehaviour
         m_rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.name);
+        m_rigidbody.velocity = Vector2.zero;
     }
 
 }

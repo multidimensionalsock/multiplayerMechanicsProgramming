@@ -35,10 +35,6 @@ public class CatMovement : PlayerMovement
             magicPillarCollision = collision.gameObject;
 
         }
-        else if (collision.gameObject.layer == 11)
-        {
-            teleporter = collision.gameObject;
-        }
     }
 
 
@@ -50,7 +46,19 @@ public class CatMovement : PlayerMovement
             magicPillarCollision = null;
 
         }
-        else if (collision.gameObject.layer == 11)
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 11)
+        {
+            teleporter = collision.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 11)
         {
             teleporter = null;
         }
